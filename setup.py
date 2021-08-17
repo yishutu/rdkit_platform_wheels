@@ -141,7 +141,7 @@ class BuildRDKit(build_ext_orig):
         # Clone RDKit from git at rdkit_tag
         os.chdir(str(rdkit_build_path))
         cmds = [
-            f'git clone -b {ext.rdkit_tag} https://github.com/rdkit/rdkit'
+            f'git clone -b master https://github.com/connorcoley/rdkit'
             ]
         [check_call(c.split()) for c in cmds]
         
@@ -182,7 +182,7 @@ class BuildRDKit(build_ext_orig):
 
 setup(
     name="rdkit-pypi",
-    version=f"2021.3.4",
+    version=f"2017.3.1.special",
     description="A collection of chemoinformatics and machine-learning software written in C++ and Python",
     url="https://github.com/kuelumbus/rdkit_platform_wheels",
     project_urls={
