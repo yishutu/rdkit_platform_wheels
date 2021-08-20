@@ -151,6 +151,7 @@ class BuildRDKit(build_ext_orig):
         options = [
                     f'-DPYTHON_EXECUTABLE={sys.executable}',
                     f'-DPYTHON_INCLUDE_DIR={get_paths()["include"]}',
+                    f'-DPYTHON_LIBRARIES={get_paths()["stdlib"]}',
 
                     # RDKIT build flags
                     f"-DRDK_BUILD_INCHI_SUPPORT=ON",
