@@ -129,8 +129,7 @@ class BuildRDKit(build_ext_orig):
         if sys.platform == 'win32':
                     cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
-            f'SET ZLIB_SOURCE="C:\\PROGRA~1\\zlib"',
-            f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20',
+            f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20 -s ZLIB_SOURCE="C:\\PROGRA~1\\zlib"',
          ]
                 
         [check_call(c.split()) for c in cmds]
