@@ -27,8 +27,9 @@ class BuildRDKit(build_ext_orig):
     def run(self):
         print('I am here')
         for ext in self.extensions:
-            # Build boost
-            self.build_boost(ext)
+            # Build boost only for mac and linux
+            if sys.platform != 'win32':
+                self.build_boost(ext)
             # Then RDKit
             self.build_rdkit(ext)
             # Copy files so that a wheels package can be created
