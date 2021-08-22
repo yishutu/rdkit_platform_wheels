@@ -12,7 +12,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
     
-print('I am here')
+
 
 class RDKit(Extension):
 
@@ -25,6 +25,7 @@ class RDKit(Extension):
 class BuildRDKit(build_ext_orig):
 
     def run(self):
+        print('I am here')
         for ext in self.extensions:
             # Build boost
             self.build_boost(ext)
@@ -90,7 +91,7 @@ class BuildRDKit(build_ext_orig):
     
     def build_boost(self, ext):
         """Build the Boost libraries"""
-        
+        print('Bulding boost')
         cwd = Path().absolute()
         boost_build_path = Path(self.build_temp).absolute() / 'boost'
         boost_build_path.mkdir(parents=True, exist_ok=True)
