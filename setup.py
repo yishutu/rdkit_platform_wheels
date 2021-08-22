@@ -163,7 +163,7 @@ class BuildRDKit(build_ext_orig):
                     f"-DRDK_INSTALL_INTREE=OFF",
                     f"-DRDK_BUILD_CAIRO_SUPPORT=ON",
 
-                    f"-DBOOST_ROOT={boost_install_path}" if sys.platform != 'win32' else "C:\local\boost_1_74_0",
+                    f"-DBOOST_ROOT={boost_install_path}" if sys.platform != 'win32' else "C:\\local\\boost_1_74_0",
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
