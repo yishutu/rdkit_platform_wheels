@@ -11,6 +11,8 @@ from pathlib import Path
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+    
+print('I am here')
 
 class RDKit(Extension):
 
