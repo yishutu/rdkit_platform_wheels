@@ -30,5 +30,6 @@ repair-wheel-command = [
 ]
 
 [tool.cibuildwheel.windows]
+before-build = "choco install boost-msvc-14.1"
 
           
