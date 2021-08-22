@@ -120,11 +120,17 @@ class BuildRDKit(build_ext_orig):
             ]
         # Ok to fail
         [call(c.split()) for c in cmds]
-
+         
         cmds = [
             f'./bootstrap.sh --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
             f'./b2 install --prefix={boost_install_path} -j 20',
         ]
+        # change commands for win32
+        if sys.platform == 'win32':
+                    cmds = [
+            f'./bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
+            f'./b2 install --prefix={boost_install_path} -j 20',
+         ]
         [check_call(c.split()) for c in cmds]
 
         os.chdir(str(cwd))
@@ -162,7 +168,7 @@ class BuildRDKit(build_ext_orig):
                     f"-DRDK_INSTALL_INTREE=OFF",
                     f"-DRDK_BUILD_CAIRO_SUPPORT=ON",
 
-                    f"-DBOOST_ROOT={boost_install_path}" if sys.platform != 'win32' else "-DBOOST_ROOT=C:\\local\\boost_1_74_0",
+                    f"-DBOOST_ROOT={boost_install_path}",
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
