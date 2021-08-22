@@ -123,13 +123,13 @@ class BuildRDKit(build_ext_orig):
          
         cmds = [
             f'./bootstrap.sh --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
-            f'./b2 install --with-python --prefix={boost_install_path} -j 20',
+            f'./b2 install  --prefix={boost_install_path} -j 20',
         ]
         # change commands for win32
         if sys.platform == 'win32':
                     cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
-            f'./b2 install --prefix={boost_install_path} -j 20',
+            f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20',
          ]
         [check_call(c.split()) for c in cmds]
 
