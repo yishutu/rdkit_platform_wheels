@@ -167,8 +167,8 @@ class BuildRDKit(build_ext_orig):
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
-                    f"-DCMAKE_C_FLAGS=-Wno-implicit-function-declaration",
-                    f"-DCMAKE_CXX_FLAGS=-Wno-implicit-function-declaration",
+                    f"-DCMAKE_C_FLAGS=-Wno-implicit-function-declaration" if sys.platform != 'win32' else "",
+                    f"-DCMAKE_CXX_FLAGS=-Wno-implicit-function-declaration" if sys.platform != 'win32' else "",
         
                 ]
         
