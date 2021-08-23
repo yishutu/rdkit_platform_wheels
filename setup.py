@@ -130,21 +130,19 @@ class BuildRDKit(build_ext_orig):
                     cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
             f'./b2 install -a --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20' \
-            f' -s ZLIB_INCLUDE="C:/Programmmmm/zlib/include" -s ZLIB_LIBRARY_PATH="C:/Programmmmm/zlib/lib"',
+            f'NO_ZLIB=""'
+#             f' -s ZLIB_INCLUDE="C:/Programmmmm/zlib/include" -s ZLIB_LIBRARY_PATH="C:/Programmmmm/zlib/lib"',                        
          ]
-        print(cmds)
+
         # What a dirty hack! :/
-        cmd_dirty = []
-        for c in cmds:
-            cc = []
-            for r in c.split():
-                cc.append(r.replace('Programmmmm', 'Program Files'))
-            cmd_dirty.append(cc)
+#         cmd_dirty = []
+#         for c in cmds:
+#             cc = []
+#             for r in c.split():
+#                 cc.append(r.replace('Programmmmm', 'Program Files'))
+#             cmd_dirty.append(cc)
             
-     
-        call(["ls", "C:/Program Files (x86)/zlib/lib"])
-        call(["ls", "C:/Program Files/zlib/include"])
-        [check_call(c) for c in cmd_dirty]
+        [check_call(c) for c in cmds]
 
         os.chdir(str(cwd))
 
