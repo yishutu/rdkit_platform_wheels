@@ -49,8 +49,8 @@ class BuildRDKit(build_ext_orig):
     def install_cairo(self, ext):
         # For windows only
         cmds = [
-            f'wget https://github.com/preshing/cairo-windows/releases/download/1.15.12/cairo-windows-1.15.12.zip --no-check-certificate --directory-prefix=C:\\',
-            f'powershell -command "Expand-Archive -Force C:\\cairo-windows-1.15.12.zip C:\\"',
+            f'wget https://github.com/preshing/cairo-windows/releases/download/1.15.4/cairo-windows-1.15.4.zip --no-check-certificate --directory-prefix=C:\\',
+            f'powershell -command "Expand-Archive -Force C:\\cairo-windows-1.15.4.zip C:\\"',
             ]
 
         [check_call(c.split()) for c in cmds]
@@ -191,8 +191,8 @@ class BuildRDKit(build_ext_orig):
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
 
                     # for win 
-                    f"-DCAIRO_INCLUDE_DIRS=C:\\cairo-windows-1.15.12\\include" if sys.platform == 'win32' else "",
-                    f"-DCAIRO_LIBRARIES=C:\\cairo-windows-1.15.12\\lib\\x64" if sys.platform == 'win32' else "",
+                    f"-DCAIRO_INCLUDE_DIRS=C:\\cairo-windows-1.15.4\\include" if sys.platform == 'win32' else "",
+                    f"-DCAIRO_LIBRARIES=C:\\cairo-windows-1.15.4\\lib\\x86" if sys.platform == 'win32' else "",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
                     f"-DCMAKE_C_FLAGS=-Wno-implicit-function-declaration" if sys.platform != 'win32' else "",
