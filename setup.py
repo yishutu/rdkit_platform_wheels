@@ -185,14 +185,17 @@ class BuildRDKit(build_ext_orig):
                     f"-DRDK_BUILD_AVALON_SUPPORT=ON",
                     f"-DRDK_BUILD_PYTHON_WRAPPERS=ON",
                     f"-DRDK_INSTALL_INTREE=OFF",
-                    f"-DRDK_BUILD_CAIRO_SUPPORT=ON",
+                    # deactivate cario for windows for now 
+                    
+                    
 
                     f"-DBOOST_ROOT={boost_install_path}",
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
-
+                    
+                    f"-DRDK_BUILD_CAIRO_SUPPORT=ON" if sys.platform != 'win32' else f"-DRDK_BUILD_CAIRO_SUPPORT=OFF",
                     # for win 
-                    f"-DCAIRO_INCLUDE_DIRS=C:\\cairo-windows-1.15.4\\include" if sys.platform == 'win32' else "",
-                    f"-DCAIRO_LIBRARIES=C:\\cairo-windows-1.15.4\\lib\\x86" if sys.platform == 'win32' else "",
+                    # f"-DCAIRO_INCLUDE_DIRS=C:\\cairo-windows-1.15.4\\include" if sys.platform == 'win32' else "",
+                    #f"-DCAIRO_LIBRARIES=C:\\cairo-windows-1.15.4\\lib\\x86" if sys.platform == 'win32' else "",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
                     f"-DCMAKE_C_FLAGS=-Wno-implicit-function-declaration" if sys.platform != 'win32' else "",
