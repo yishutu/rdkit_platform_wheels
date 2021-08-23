@@ -27,11 +27,13 @@ class BuildRDKit(build_ext_orig):
     def run(self):
         print('I am here')
         for ext in self.extensions:
+
+            if sys.platform == 'win32':
+                self.install_cairo(ext)
+
             # Build boot
             self.build_boost(ext)
 
-            if platform == 'win32':
-                self.install_cairo(ext)
             # Then RDKit
             self.build_rdkit(ext)
             # Copy files so that a wheels package can be created
