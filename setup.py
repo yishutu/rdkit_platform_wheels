@@ -29,6 +29,9 @@ class BuildRDKit(build_ext_orig):
         for ext in self.extensions:
             # Build boot
             self.build_boost(ext)
+
+            if platform == 'win32':
+                self.install_cairo(ext)
             # Then RDKit
             self.build_rdkit(ext)
             # Copy files so that a wheels package can be created
@@ -40,7 +43,17 @@ class BuildRDKit(build_ext_orig):
     def get_ext_filename(self, ext_name):
         ext_path = ext_name.split('.')
         return os.path.join(*ext_path)
-                
+
+    def install_cairo(self, ext):
+        # For windows only
+        cmds = [
+            f'wget https://github.com/preshing/cairo-windows/releases/download/1.15.12/cairo-windows-1.15.12.zip --no-check-certificate',
+            f'tar -xf cairo-windows-1.15.12.zip -C C:\\',
+            ]
+
+        [check_call(c.split()) for c in cmds]
+
+
     def create_package(self, ext):
         from distutils.file_util import copy_file
         from shutil import copytree, rmtree
@@ -127,13 +140,13 @@ class BuildRDKit(build_ext_orig):
         ]
         # change commands for win32
         if sys.platform == 'win32':
-                    cmds = [
+            cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
              
             f'./b2 --with-python --with-serialization --with-iostreams --with-system --with-regex ' \
             f'-s ZLIB_LIBRARY_PATH=C:\\vcpkg\\packages\\zlib_x86-windows\\lib -s ZLIB_INCLUDE=C:\\vcpkg\\packages\\zlib_x86-windows\\include ' \
             f'--prefix={boost_install_path} -j 20 install'                     
-         ]
+            ]
          
         [check_call(c.split()) for c in cmds]
 
@@ -174,6 +187,10 @@ class BuildRDKit(build_ext_orig):
 
                     f"-DBOOST_ROOT={boost_install_path}",
                     f"-DBoost_NO_SYSTEM_PATHS=ON",
+
+                    # for win 
+                    f"-DCAIRO_INCLUDE_DIRS=C:\\cairo-windows-1.15.12\\include" if sys.platform == 'win32' else "",
+                    f"-DCAIRO_LIBRARIES=C:\\cairo-windows-1.15.12\\lib\\x64" if sys.platform == 'win32' else "",
 
                     f"-DCMAKE_INSTALL_PREFIX={rdkit_install_path}",
                     f"-DCMAKE_C_FLAGS=-Wno-implicit-function-declaration" if sys.platform != 'win32' else "",
