@@ -142,8 +142,8 @@ class BuildRDKit(build_ext_orig):
             
         print('HERE')    
         print(cmd_dirty)
-        call(["ls", "C:\\Program Files (x86)\\zlib\\"])
-        call(["ls", "C:\\Program Files\\zlib\\"])
+        call(["ls", "C:\\Program Files (x86)\\zlib\\lib"])
+        call(["ls", "C:\\Program Files\\zlib\\include"])
         [check_call(c) for c in cmd_dirty]
 
         os.chdir(str(cwd))
