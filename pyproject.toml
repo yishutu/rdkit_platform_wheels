@@ -33,11 +33,7 @@ repair-wheel-command = [
 before-build = [
     "choco install tartool wget sed",
     "vcpkg install zlib",
-    
-#    'powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat',
-    
-#    "set ARCH=Win32",
-#    'powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat',
+    "vcpkg install freetype",
 ]
 
           
