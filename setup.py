@@ -140,7 +140,8 @@ class BuildRDKit(build_ext_orig):
 #             for r in c.split():
 #                 cc.append(r.replace('Programmmmm', 'Program Files'))
 #             cmd_dirty.append(cc)
-            
+        run(['ls', 'C:\\vcpkg'])
+        run(['ls', 'C:\\vcpkg\\packages'])
         [check_call(c.split()) for c in cmds]
 
         os.chdir(str(cwd))
