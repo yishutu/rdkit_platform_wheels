@@ -139,7 +139,7 @@ class BuildRDKit(build_ext_orig):
             for r in c.split():
                 cc.append(r.replace('Programmmmm', 'Program Files'))
             cmd_dirty.append(cc)
-            
+        print(cmd_dirty)
         [check_call(c) for c in cmd_dirty]
 
         os.chdir(str(cwd))
