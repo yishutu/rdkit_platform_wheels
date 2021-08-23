@@ -134,10 +134,7 @@ class BuildRDKit(build_ext_orig):
             f'-s ZLIB_LIBRARY_PATH=C:\\vcpkg\\packages\\zlib_x86-windows\\lib -s ZLIB_INCLUDE=C:\\vcpkg\\packages\\zlib_x86-windows\\include ' \
             f'--prefix={boost_install_path} -j 20 install'                     
          ]
-
-        run(['ls', 'C:\\vcpkg\\packages\\zlib_x86-windows'])
-        run(['ls', 'C:\\vcpkg\\packages\\zlib_x86-windows\\include'])
-        run(['ls', 'C:\\vcpkg\\packages\\zlib_x86-windows\\lib'])
+         
         [check_call(c.split()) for c in cmds]
 
         os.chdir(str(cwd))
