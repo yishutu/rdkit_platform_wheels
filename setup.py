@@ -130,8 +130,7 @@ class BuildRDKit(build_ext_orig):
                     cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
             f'./b2 install -a --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20' \
-            f'NO_ZLIB=""'
-#             f' -s ZLIB_INCLUDE="C:/Programmmmm/zlib/include" -s ZLIB_LIBRARY_PATH="C:/Programmmmm/zlib/lib"',                        
+            f'-s ZLIB_LIBRARY_PATH=C:\vcpkg\packages\zlib_x86-windows\lib -s ZLIB_INCLUDE=C:\vcpkg\packages\zlib_x86-windows\include',                        
          ]
 
         # What a dirty hack! :/
