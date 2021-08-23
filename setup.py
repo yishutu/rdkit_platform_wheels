@@ -56,7 +56,7 @@ class BuildRDKit(build_ext_orig):
         rdpaths = rdkit_pyfiles / 'RDPaths.py'
 
         # For linux
-        if platform == "linux" or platform == "linux2":
+        if platform == "linux" or platform == "linux2" or platform == 'win32':
             # linux
             call(["sed", "-i", "/_share =/c\_share = os.path.dirname(__file__)", str(rdpaths)])
         elif platform == "darwin":
