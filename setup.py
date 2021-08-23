@@ -129,7 +129,7 @@ class BuildRDKit(build_ext_orig):
         if sys.platform == 'win32':
                     cmds = [
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
-            f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20 -s ZLIB_INCLUDE="C:\\Programmmmm\\zlib\\include" -s ZLIB_LIBRARY_PATH="C:\\Programmmmm\\zlib\\lib" --debug-configuration --debug-generator --debug-building',
+            f'./b2 install -a --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20 -s ZLIB_INCLUDE="C:\\Programmmmm\\zlib\\include" -s ZLIB_LIBRARY_PATH="C:\\Programmmmm\\zlib\\lib"',
          ]
         print(cmds)
         # What a dirty hack! :/
@@ -137,13 +137,13 @@ class BuildRDKit(build_ext_orig):
         for c in cmds:
             cc = []
             for r in c.split():
-                cc.append(r.replace('Programmmmm', 'Program Files (x86)'))
+                cc.append(r.replace('Programmmmm', 'Program Files'))
             cmd_dirty.append(cc)
             
         print('HERE')    
         print(cmd_dirty)
-        call("ls C:\\Program Files (x86)\\zlib\\".split())
-        call("ls C:\\Program Files\\zlib\\".split())
+        call(["ls", "C:\\Program Files (x86)\\zlib\\"])
+        call(["ls", "C:\\Program Files\\zlib\\"])
         [check_call(c) for c in cmd_dirty]
 
         os.chdir(str(cwd))
