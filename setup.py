@@ -132,8 +132,15 @@ class BuildRDKit(build_ext_orig):
             f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20 -s ZLIB_INCLUDE="C:\\Programmmmm\\zlib\\include" -s ZLIB_LIBRARY_PATH="C:\\Programmmmm\\zlib\\lib"',
          ]
         
-        # That's a dirty hack! :(        
-        [check_call([r.replace('Programmmmm', 'Program Files') for r  in c.split()]) for c in cmds]
+        # That's a dirty hack! :(     
+        cmd_dirty = []
+        for c in cmds:
+            cc = []
+            for r in c.split():
+                cc.append(r.replace('Programmmmm', 'Program Files'))
+            cmd_dirty.append(cc)
+            
+        [check_call(c) for c in cmd_dirty]
 
         os.chdir(str(cwd))
 
