@@ -131,15 +131,18 @@ class BuildRDKit(build_ext_orig):
             f'bootstrap.bat --with-libraries=python,serialization,iostreams,system,regex --with-python={sys.executable} --with-python-root={Path(sys.executable).parent}/..',
             f'./b2 install --with-python --with-serialization --with-iostreams --with-system --with-regex --prefix={boost_install_path} -j 20 -s ZLIB_INCLUDE="C:\\Programmmmm\\zlib\\include" -s ZLIB_LIBRARY_PATH="C:\\Programmmmm\\zlib\\lib"',
          ]
-        
-        # That's a dirty hack! :(     
+        print(cmds)
+        # What a dirty hack! :/
         cmd_dirty = []
         for c in cmds:
             cc = []
             for r in c.split():
-                cc.append(r.replace('Programmmmm', 'Program Files'))
+                cc.append(r.replace('Programmmmm', 'Program Files (x86)'))
             cmd_dirty.append(cc)
+            
+        print('HERE')    
         print(cmd_dirty)
+        
         [check_call(c) for c in cmd_dirty]
 
         os.chdir(str(cwd))
