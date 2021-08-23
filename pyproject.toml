@@ -31,7 +31,7 @@ repair-wheel-command = [
 
 [tool.cibuildwheel.windows]
 before-build = [
-    "choco install tartool wget",
+    "choco install tartool wget sed",
     "vcpkg install zlib",
     
 #    'powershell -Command "(Invoke-WebRequest -Uri https://git.io/JnHTY -OutFile install_zlib.bat)"; ./install_zlib.bat; del install_zlib.bat',
